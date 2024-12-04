@@ -2,8 +2,6 @@
 // Include the required dependencies
 require_once '../vendor/autoload.php';
 
-session_start();
-
 // Load configuration
 $config = require '../config.php';
 $clientId = $config['client_id'];
