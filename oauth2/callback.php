@@ -78,6 +78,8 @@ if (isset($_GET['code'])) {
  */
 function handleUserInDatabase($userId, $userEmail)
 {
+    $nextcloudUrl = 'https://cloud.webbypage.com';
+
     // Include the database connection
     include('../database/conn.php'); // This assumes you have a conn.php file for DB connection
 
