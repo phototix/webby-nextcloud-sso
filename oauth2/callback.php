@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // Include the required dependencies
 require_once '../vendor/autoload.php';
 

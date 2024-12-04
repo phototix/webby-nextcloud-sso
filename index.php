@@ -1,11 +1,9 @@
 <?php
-
+session_start();
 require 'vendor/autoload.php';
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-
-session_start();
 
 // Load configuration
 $config = require 'config.php';
