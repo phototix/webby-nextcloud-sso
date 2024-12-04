@@ -4,6 +4,9 @@ session_start();
 // Include the required dependencies
 require_once '../vendor/autoload.php';
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
+
 // Load configuration
 $config = require '../config.php';
 $clientId = $config['client_id'];
