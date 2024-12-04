@@ -7,10 +7,13 @@ use GuzzleHttp\Exception\RequestException;
 
 session_start();
 
+// Load configuration
+$config = require 'config.php';
+$clientId = $config['client_id'];
+$clientSecret = $config['client_secret'];
+
 // Configuration
 $nextcloudUrl = 'https://cloud.webbypage.com';
-$clientId = 'rhj4VbpZkuG5ULDVjKMFcBjzZ5BlPtmnZoF3uNW6fKzTGnHVS8XaqzoK4Ru08igW';
-$clientSecret = '26owajtSRduBrkGaJqhqxv7f2PgRK1W3po9omLK7A5ENxdi0vUdJvTD7lJ4nyXAW';
 $redirectUri = 'https://member.webbypage.com/oauth2/callback';
 $authorizationUrl = $nextcloudUrl . '/apps/oauth2/authorize';
 $tokenUrl = $nextcloudUrl . '/apps/oauth2/token';
@@ -84,21 +87,12 @@ if (isset($_GET['code'])) {
 // Function to check if a user exists in your app
 function checkIfUserExists($username) {
     // Implement database check logic
-    // Example:
-    // $db = new PDO(...);
-    // $stmt = $db->prepare('SELECT * FROM users WHERE username = ?');
-    // $stmt->execute([$username]);
-    // return $stmt->fetch();
     return false; // Placeholder
 }
 
 // Function to create a new user
 function createNewUser($username, $email) {
     // Implement database insert logic
-    // Example:
-    // $db = new PDO(...);
-    // $stmt = $db->prepare('INSERT INTO users (username, email) VALUES (?, ?)');
-    // $stmt->execute([$username, $email]);
 }
 
 ?>
