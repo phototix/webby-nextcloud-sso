@@ -19,28 +19,26 @@ $authorizationUrl = $nextcloudUrl . '/apps/oauth2/authorize';
 $tokenUrl = $nextcloudUrl . '/apps/oauth2/api/v1/token';
 $userInfoUrl = $nextcloudUrl . '/ocs/v1.php/cloud/user?format=json';
 
-// Step 1: Redirect to Nextcloud Authorization
-if (!isset($_GET['code'])) {
+if (!isset($_GET['code'])&&!isset($_SESSION['oauth2state'])) {
 
-    if(!isset($_SESSION['oauth2state']) && $_SESSION['oauth2state']==""){
-        $state = bin2hex(random_bytes(16));
-        $_SESSION['oauth2state'] = $state;
+    $state = bin2hex(random_bytes(16));
+    $_SESSION['oauth2state'] = $state;
 
-        $authUrl = $authorizationUrl . '?' . http_build_query([
-            'client_id'     => $clientId,
-            'redirect_uri'  => $redirectUri,
-            'response_type' => 'code',
-            'scope'         => '',
-            'state'         => $state,
-        ]);
+    $authUrl = $authorizationUrl . '?' . http_build_query([
+        'client_id'     => $clientId,
+        'redirect_uri'  => $redirectUri,
+        'response_type' => 'code',
+        'scope'         => '',
+        'state'         => $state,
+    ]);
 
-        header('Location: ' . $authUrl);
-        exit;
-    }
+    header('Location: ' . $authUrl);
+    exit;
         
 }else{
 
-    echo "Welcome to WebbyPage Member Connector Center";
+    echo "Welcome to WebbyPage Member Connector Center<br>";
+    echo '<a href="logout.php">Logout</a>'
 
 }
 ?>
