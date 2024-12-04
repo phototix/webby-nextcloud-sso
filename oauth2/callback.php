@@ -16,7 +16,7 @@ $clientSecret = $config['client_secret'];
 $nextcloudUrl = 'https://cloud.webbypage.com';
 $redirectUri = 'https://member.webbypage.com/oauth2/callback.php';
 $authorizationUrl = $nextcloudUrl . '/index.php/apps/oauth2/authorize';
-$tokenUrl = $nextcloudUrl . '/apps/oauth2/api/v1/token';
+$tokenUrl = $nextcloudUrl . '/index.php/apps/oauth2/api/v1/token';
 $userInfoUrl = $nextcloudUrl . '/ocs/v1.php/cloud/user?format=json';
 
 // Start the callback handler
@@ -52,10 +52,7 @@ if (isset($_GET['code'])) {
         $username = $userData['ocs']['data']['id'];
         $email = $userData['ocs']['data']['email'];
 
-        // Step 4: Check User in Your App
-        if (!checkIfUserExists($username)) {
-            createNewUser($username, $email);
-        }
+        createNewUser($username, $email);
 
         // Log the user in
         $_SESSION['user'] = $username;
