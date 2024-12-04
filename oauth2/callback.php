@@ -89,10 +89,10 @@ function handleUserInDatabase($userId, $userEmail)
 
         if ($userRecord) {
             // Record found, redirect to the URL stored in admin_unique column
-            return $userRecord['admin_unique'];
+            return $userRecord['app_url'];
         } else {
             // No record found, create a new one
-            $stmt = $pdo->prepare("INSERT INTO db_admin (admin_name, admin_email, admin_unique) VALUES (:admin_name, :admin_email, 'https://member.webbypage.com')");
+            $stmt = $pdo->prepare("INSERT INTO db_admin (admin_name, admin_email, app_url, cloud_url) VALUES (:admin_name, :admin_email, 'https://member.webbypage.com', $nextcloudUrl)");
             $stmt->execute([
                 'admin_name' => $userId,
                 'admin_email' => $userEmail,

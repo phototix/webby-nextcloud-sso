@@ -22,13 +22,15 @@ try {
     // Set PDO error mode to exception
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-    // SQL to alter column type to TEXT
-    $sql = "ALTER TABLE db_admin MODIFY COLUMN admin_unique TEXT";
+    // SQL to add new columns 'app_url' and 'cloud_url'
+    $sql = "ALTER TABLE db_admin 
+            ADD COLUMN app_url TEXT NOT NULL, 
+            ADD COLUMN cloud_url TEXT NOT NULL";
     
     // Execute the query
     $pdo->exec($sql);
     
-    echo "Column 'admin_unique' successfully modified to TEXT.";
+    echo "Columns 'app_url' and 'cloud_url' successfully added.";
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
