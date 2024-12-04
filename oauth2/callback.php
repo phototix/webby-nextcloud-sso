@@ -79,7 +79,7 @@ if (isset($_GET['code'])) {
 function handleUserInDatabase($userId, $userEmail)
 {
     // Include the database connection
-    include('conn.php'); // This assumes you have a conn.php file for DB connection
+    include('../database/conn.php'); // This assumes you have a conn.php file for DB connection
 
     try {
         // Check if the email exists in the db_admin table
@@ -104,4 +104,16 @@ function handleUserInDatabase($userId, $userEmail)
         echo "Database error: " . $e->getMessage();
         return null;
     }
-}
+}<?php
+// Start the session
+session_start();
+
+// Clear all session variables
+session_unset();
+
+// Destroy the session
+session_destroy();
+
+// Redirect to a specific page after logout (e.g., homepage or login page)
+header("Location: /"); // Replace with your desired redirect URL
+exit;
