@@ -14,7 +14,7 @@ $clientSecret = $config['client_secret'];
 
 // Configuration
 $nextcloudUrl = 'https://cloud.webbypage.com/index.php';
-$redirectUri = 'https://member.webbypage.com/oauth2/callback';
+$redirectUri = 'https://member.webbypage.com/oauth2/callback.php';
 $authorizationUrl = $nextcloudUrl . '/apps/oauth2/authorize';
 $tokenUrl = $nextcloudUrl . '/apps/oauth2/api/v1/token';
 $userInfoUrl = $nextcloudUrl . '/ocs/v1.php/cloud/user?format=json';
