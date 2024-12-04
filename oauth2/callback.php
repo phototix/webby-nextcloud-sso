@@ -1,6 +1,6 @@
 <?php
 // Include the required dependencies
-require_once 'vendor/autoload.php';
+require_once '../vendor/autoload.php';
 
 // Load configuration
 $config = require 'config.php';
