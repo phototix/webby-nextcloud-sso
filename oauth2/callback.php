@@ -13,7 +13,7 @@ $clientId = $config['client_id'];
 $clientSecret = $config['client_secret'];
 
 // Configuration
-$nextcloudUrl = 'https://cloud.i-dc.institute';
+$nextcloudUrl = 'https://cloud.webbypage.com';
 $redirectUri = 'https://member.webbypage.com/oauth2/callback.php';
 $authorizationUrl = $nextcloudUrl . '/index.php/apps/oauth2/authorize';
 $tokenUrl = $nextcloudUrl . '/index.php/apps/oauth2/api/v1/token';
@@ -78,7 +78,7 @@ if (isset($_GET['code'])) {
  */
 function handleUserInDatabase($userId, $userEmail)
 {
-    $nextcloudUrl = 'https://cloud.i-dc.institute';
+    $nextcloudUrl = 'https://cloud.webbypage.com';
 
     // Include the database connection
     include('../database/conn.php'); // This assumes you have a conn.php file for DB connection
