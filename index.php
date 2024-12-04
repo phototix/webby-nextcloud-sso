@@ -13,10 +13,10 @@ $clientId = $config['client_id'];
 $clientSecret = $config['client_secret'];
 
 // Configuration
-$nextcloudUrl = 'https://cloud.webbypage.com';
+$nextcloudUrl = 'https://cloud.webbypage.com/index.php';
 $redirectUri = 'https://member.webbypage.com/oauth2/callback';
 $authorizationUrl = $nextcloudUrl . '/apps/oauth2/authorize';
-$tokenUrl = $nextcloudUrl . '/apps/oauth2/token';
+$tokenUrl = $nextcloudUrl . '/apps/oauth2/api/v1/token';
 $userInfoUrl = $nextcloudUrl . '/ocs/v1.php/cloud/user?format=json';
 
 // Step 1: Redirect to Nextcloud Authorization
