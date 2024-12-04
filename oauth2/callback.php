@@ -17,7 +17,7 @@ $userInfoUrl = $nextcloudUrl . '/ocs/v1.php/cloud/user?format=json';
 // Start the callback handler
 if (isset($_GET['code'])) {
     if (!isset($_GET['state']) || $_GET['state'] !== $_SESSION['oauth2state']) {
-        exit('Invalid state:'.$_GET['state']);
+        exit('Invalid state:'.$_GET['state']." & session: ".$_SESSION['oauth2state']);
     }
 
     try {
