@@ -3,7 +3,7 @@
 require_once '../vendor/autoload.php';
 
 // Load configuration
-$config = require 'config.php';
+$config = require '../config.php';
 $clientId = $config['client_id'];
 $clientSecret = $config['client_secret'];
 
