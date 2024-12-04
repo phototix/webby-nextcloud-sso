@@ -52,7 +52,13 @@ if (isset($_GET['code'])) {
         $username = $userData['ocs']['data']['id'];
         $email = $userData['ocs']['data']['email'];
 
-        createNewUser($username, $email);
+        // Handle user in database
+        $userRedirectUrl = handleUserInDatabase($username, $email);
+
+        if ($userRedirectUrl) {
+            header("Location: $userRedirectUrl");
+            exit;
+        }
 
         // Log the user in
         $_SESSION['user'] = $username;
@@ -64,12 +70,38 @@ if (isset($_GET['code'])) {
 }
 
 /**
- * Save user data to the database.
+ * Handle user creation or retrieval from database.
  *
  * @param string $userId
  * @param string|null $userEmail
+ * @return string|null URL to redirect to if found
  */
-function createNewUser($userId, $userEmail)
+function handleUserInDatabase($userId, $userEmail)
 {
-    echo "Account details successfully taken: ".$userId." & email: ".$userEmail;
+    // Include the database connection
+    include('conn.php'); // This assumes you have a conn.php file for DB connection
+
+    try {
+        // Check if the email exists in the db_admin table
+        $stmt = $pdo->prepare("SELECT * FROM db_admin WHERE admin_email = :admin_email");
+        $stmt->execute(['admin_email' => $userEmail]);
+        $userRecord = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($userRecord) {
+            // Record found, redirect to the URL stored in admin_unique column
+            return $userRecord['admin_unique'];
+        } else {
+            // No record found, create a new one
+            $stmt = $pdo->prepare("INSERT INTO db_admin (admin_name, admin_email, admin_unique) VALUES (:admin_name, :admin_email, 'https://member.webbypage.com')");
+            $stmt->execute([
+                'admin_name' => $userId,
+                'admin_email' => $userEmail,
+            ]);
+            // You can return a URL if needed, or just return null for a general case
+            return null;
+        }
+    } catch (PDOException $e) {
+        echo "Database error: " . $e->getMessage();
+        return null;
+    }
 }
