@@ -19,26 +19,30 @@ $authorizationUrl = $nextcloudUrl . '/apps/oauth2/authorize';
 $tokenUrl = $nextcloudUrl . '/apps/oauth2/api/v1/token';
 $userInfoUrl = $nextcloudUrl . '/ocs/v1.php/cloud/user?format=json';
 
-if (!isset($_GET['code'])&&!isset($_SESSION['oauth2state'])) {
+if (!isset($_GET['code'])) {
 
-    $state = bin2hex(random_bytes(16));
-    $_SESSION['oauth2state'] = $state;
+    if(!empty($_SESSION['oauth2state'])){
+        echo "Welcome to WebbyPage Member Connector Center<br>";
+        echo '<a href="logout.php">Logout</a>';
+    }else{
+        $state = bin2hex(random_bytes(16));
+        $_SESSION['oauth2state'] = $state;
 
-    $authUrl = $authorizationUrl . '?' . http_build_query([
-        'client_id'     => $clientId,
-        'redirect_uri'  => $redirectUri,
-        'response_type' => 'code',
-        'scope'         => '',
-        'state'         => $state,
-    ]);
+        $authUrl = $authorizationUrl . '?' . http_build_query([
+            'client_id'     => $clientId,
+            'redirect_uri'  => $redirectUri,
+            'response_type' => 'code',
+            'scope'         => '',
+            'state'         => $state,
+        ]);
 
-    header('Location: ' . $authUrl);
-    exit;
+        header('Location: ' . $authUrl);
+        exit;
+    }
+        
         
 }else{
-
     echo "Welcome to WebbyPage Member Connector Center<br>";
-    echo '<a href="logout.php">Logout</a>'
-
+    echo '<a href="logout.php">Logout</a>';
 }
 ?>
