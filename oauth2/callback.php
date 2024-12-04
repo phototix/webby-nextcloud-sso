@@ -8,7 +8,7 @@ $clientId = $config['clientId'];
 $clientSecret = $config['clientSecret'];
 $redirectUri = 'https://member.webbypage.com/oauth2/callback.php';
 $tokenEndpoint = 'https://cloud.webbypage.com/index.php/apps/oauth2/api/v1/token';
-$userInfoEndpoint = 'https://cloud.webbypage.com/index.php/ocs/v2.php/cloud/user?format=json';
+$userInfoEndpoint = 'https://cloud.webbypage.com/ocs/v2.php/cloud/user?format=json';
 
 // Start the callback handler
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['code'])) {
