@@ -13,7 +13,7 @@ $clientId = $config['client_id'];
 $clientSecret = $config['client_secret'];
 
 // Configuration
-$nextcloudUrl = 'https://cloud.webbypage.com/index.php';
+$nextcloudUrl = 'https://cloud.i-dc.institute/index.php';
 $redirectUri = 'https://member.webbypage.com/oauth2/callback.php';
 $authorizationUrl = $nextcloudUrl . '/apps/oauth2/authorize';
 $tokenUrl = $nextcloudUrl . '/apps/oauth2/api/v1/token';
