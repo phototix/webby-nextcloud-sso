@@ -92,10 +92,11 @@ function handleUserInDatabase($userId, $userEmail)
             return $userRecord['app_url'];
         } else {
             // No record found, create a new one
-            $stmt = $pdo->prepare("INSERT INTO db_admin (admin_name, admin_email, app_url, cloud_url) VALUES (:admin_name, :admin_email, 'https://member.webbypage.com', $nextcloudUrl)");
+            $stmt = $pdo->prepare("INSERT INTO db_admin (admin_name, admin_email, app_url, cloud_url) VALUES (:admin_name, :admin_email, 'https://member.webbypage.com', :cloud_url)");
             $stmt->execute([
                 'admin_name' => $userId,
                 'admin_email' => $userEmail,
+                'cloud_url' => $nextcloudUrl,
             ]);
             // You can return a URL if needed, or just return null for a general case
             return null;
