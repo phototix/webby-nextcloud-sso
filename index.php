@@ -22,8 +22,7 @@ $userInfoUrl = $nextcloudUrl . '/ocs/v1.php/cloud/user?format=json';
 if (!isset($_GET['code'])) {
 
     if(!empty($_SESSION['oauth2state'])){
-        echo "Welcome to WebbyPage Member Connector Center<br>";
-        echo '<a href="logout.php">Logout</a>';
+        include("login.php");
     }else{
         $state = bin2hex(random_bytes(16));
         $_SESSION['oauth2state'] = $state;
@@ -42,7 +41,6 @@ if (!isset($_GET['code'])) {
         
         
 }else{
-    echo "Welcome to WebbyPage Member Connector Center<br>";
-    echo '<a href="logout.php">Logout</a>';
+    include("login.php");
 }
 ?>
