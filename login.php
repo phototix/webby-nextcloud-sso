@@ -39,7 +39,7 @@
             border-radius: 5px;
         }
         .logo {
-            max-width: 250px;
+            max-width: 350px;
             margin-bottom: 20px;
         }
     </style>
