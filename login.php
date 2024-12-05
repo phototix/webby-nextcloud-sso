@@ -11,7 +11,14 @@
             background-size: cover;
             color: #ffffff;
         }
+        h2 {
+            color:#FFF;
+        }
+        p {
+            color:#FFF;
+        }
         .card {
+            width: 60%;
             background-color: #121212;
             border-radius: 10px;
             padding: 30px;
@@ -31,7 +38,7 @@
             border-radius: 5px;
         }
         .logo {
-            max-width: 150px;
+            max-width: 250px;
             margin-bottom: 20px;
         }
     </style>
