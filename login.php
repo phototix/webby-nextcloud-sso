@@ -19,6 +19,7 @@
         }
         .card {
             width: 60%;
+            margin: 0 auto;
             background-color: #121212;
             border-radius: 10px;
             padding: 30px;
