@@ -54,10 +54,9 @@ if (isset($_GET['code'])) {
 
         // Handle user in database
         $userRedirectUrl = handleUserInDatabase($username, $email);
-        echo $userRedirectUrl."-".$username."-".$email;
 
         if ($userRedirectUrl) {
-            // header("Location: $userRedirectUrl");
+            header("Location: $userRedirectUrl");
             exit;
         }
 
@@ -66,7 +65,7 @@ if (isset($_GET['code'])) {
         exit;
 
     } catch (RequestException $e) {
-        echo 'Error: ' . $e->getMessage();
+        header("Location: /");
     }
 }
 
@@ -105,7 +104,6 @@ function handleUserInDatabase($userId, $userEmail)
             return null;
         }
     } catch (PDOException $e) {
-        echo "Database error: " . $e->getMessage();
-        return null;
+        return "https://member.webbypage.com";
     }
 }
