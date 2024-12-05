@@ -54,9 +54,10 @@ if (isset($_GET['code'])) {
 
         // Handle user in database
         $userRedirectUrl = handleUserInDatabase($username, $email);
+        echo $userRedirectUrl."-".$username."-".$email;
 
         if ($userRedirectUrl) {
-            header("Location: $userRedirectUrl");
+            // header("Location: $userRedirectUrl");
             exit;
         }
 
