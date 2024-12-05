@@ -64,7 +64,7 @@
                 </div>
                 
                 <!-- Login Button -->
-                <a href="login.php" class="btn btn-primary btn-lg">
+                <a href="logout.php" class="btn btn-primary btn-lg">
                     Log in <span class="ms-2">&rarr;</span>
                 </a>
             </div>
