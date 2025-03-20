@@ -20,10 +20,9 @@ $tokenUrl = $nextcloudUrl . '/apps/oauth2/api/v1/token';
 $userInfoUrl = $nextcloudUrl . '/ocs/v1.php/cloud/user?format=json';
 
 if (!isset($_GET['code'])) {
-
-    if(!empty($_SESSION['oauth2state'])){
+    if (!empty($_SESSION['oauth2state'])) {
         include("login.php");
-    }else{
+    } else {
         $state = bin2hex(random_bytes(16));
         $_SESSION['oauth2state'] = $state;
 
@@ -38,9 +37,44 @@ if (!isset($_GET['code'])) {
         header('Location: ' . $authUrl);
         exit;
     }
-        
-        
-}else{
-    include("login.php");
+} else {
+    // Validate the state parameter
+    if (empty($_GET['state']) || $_GET['state'] !== $_SESSION['oauth2state']) {
+        unset($_SESSION['oauth2state']);
+        exit('Invalid state');
+    }
+
+    // Exchange the authorization code for an access token
+    $httpClient = new Client();
+    try {
+        $response = $httpClient->post($tokenUrl, [
+            'form_params' => [
+                'client_id'     => $clientId,
+                'client_secret' => $clientSecret,
+                'redirect_uri'  => $redirectUri,
+                'code'          => $_GET['code'],
+                'grant_type'    => 'authorization_code',
+            ],
+        ]);
+
+        $data = json_decode($response->getBody(), true);
+
+        // Check if a redirect URL is provided in the query parameters
+        if (isset($_GET['redirect'])) {
+            $redirectUrl = filter_var($_GET['redirect'], FILTER_SANITIZE_URL);
+            if (filter_var($redirectUrl, FILTER_VALIDATE_URL)) {
+                // Append the token as a parameter to the redirect URL
+                $redirectWithToken = $redirectUrl . (strpos($redirectUrl, '?') === false ? '?' : '&') . 'token=' . $data['access_token'];
+                header('Location: ' . $redirectWithToken);
+                exit;
+            } else {
+                exit('Invalid redirect URL');
+            }
+        } else {
+            include("login.php");
+        }
+    } catch (RequestException $e) {
+        exit('Error retrieving access token: ' . $e->getMessage());
+    }
 }
 ?>
