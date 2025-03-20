@@ -1,12 +1,7 @@
 <?php
 if (isset($_GET['redirect'])) {
-    $redirectUrl = filter_var($_GET['redirect'], FILTER_SANITIZE_URL);
-    if (filter_var($redirectUrl, FILTER_VALIDATE_URL)) {
-        header('Location: ' . $redirectUrl);
-        exit;
-    } else {
-        exit('Invalid redirect URL');
-    }
+    header('Location: ' . $redirectUrl);
+    exit;
 } else {
     require 'vendor/autoload.php';
     
