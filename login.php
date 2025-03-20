@@ -48,7 +48,7 @@
     <div class="d-flex justify-content-center align-items-center vh-100">
         <div class="text-center">
             <!-- Logo -->
-            <img src="https://private-gallery.brandon.my/upload/2024/12/05/20241205112147-6d26f46d.png" 
+            <img src="https://private-gallery.brandon.my/upload/2025/03/20/20250320164036-cc90d07f.png" 
                  alt="WebbyPage Logo" 
                  class="logo">
             
