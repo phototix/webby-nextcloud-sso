@@ -2,9 +2,7 @@
 if (isset($_GET['redirect'])) {
     $redirectUrl = filter_var($_GET['redirect'], FILTER_SANITIZE_URL);
     if (filter_var($redirectUrl, FILTER_VALIDATE_URL)) {
-        // Append the token as a parameter to the redirect URL
-        $redirectWithToken = $redirectUrl . (strpos($redirectUrl, '?') === false ? '?' : '&') . 'token=' . $data['access_token'];
-        header('Location: ' . $redirectWithToken);
+        header('Location: ' . $redirectUrl);
         exit;
     } else {
         exit('Invalid redirect URL');
