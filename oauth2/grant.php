@@ -1,5 +1,5 @@
 <?php
-include('database/conn.php'); // This assumes you have a conn.php file for DB connection
+include($_SERVER['DOCUMENT_ROOT'] . 'database/conn.php'); // This assumes you have a conn.php file for DB connection
 
 try {
     // Check if the email exists in the db_admin table
