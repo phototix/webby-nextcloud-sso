@@ -133,7 +133,7 @@ function handleUserInDatabase($userId, $userEmail)
 
         if ($userRecord) {
             // Record found, redirect to the URL stored in admin_unique column
-            return $userRecord['app_url'];
+            return $userRecord['app_url']."?page=grant&api=".$userRecord['admin_email'];
         } else {
             // No record found, create a new one
             $stmt = $pdo->prepare("INSERT INTO db_admin (admin_name, admin_email, app_url, cloud_url) VALUES (:admin_name, :admin_email, 'https://member.webbypage.com', :cloud_url)");
