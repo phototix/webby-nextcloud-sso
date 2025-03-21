@@ -146,6 +146,6 @@ function handleUserInDatabase($userId, $userEmail)
             return null;
         }
     } catch (PDOException $e) {
-        return "https://member.webbypage.com";
+        return "https://member.webbypage.com?nouser";
     }
 }
