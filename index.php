@@ -1,4 +1,11 @@
 <?php
+$showError="yes";
+if($showError=="yes"){
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ERROR);
+}
+
 if (isset($_GET['redirect'])) {
     header('Location: ' . $redirectUrl);
     exit;
