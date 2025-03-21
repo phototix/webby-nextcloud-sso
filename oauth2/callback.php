@@ -19,6 +19,48 @@ $authorizationUrl = $nextcloudUrl . '/index.php/apps/oauth2/authorize';
 $tokenUrl = $nextcloudUrl . '/index.php/apps/oauth2/api/v1/token';
 $userInfoUrl = $nextcloudUrl . '/ocs/v1.php/cloud/user?format=json';
 
+function shortenUrl($longUrl)
+{
+    $apiUrl = 'https://api.tinyurl.com/create';
+
+    // Replace with your API key (if required)
+    $apiKey = 'YFBDEppzU5GOoSwYWEfxoNYsE6KzWDdIjmshN41A40i6aQqmtpAt9NjagX7G'; // Set to null if no key is required
+
+    try {
+        // Initialize Guzzle HTTP client
+        $client = new Client();
+
+        // Request headers
+        $headers = [
+            'Content-Type' => 'application/json',
+            'Authorization' => 'Bearer ' . $apiKey, // Only needed if the API requires an API key
+        ];
+
+        // Request body
+        $body = [
+            'url' => $longUrl,
+        ];
+
+        // Make POST request
+        $response = $client->post($apiUrl, [
+            'headers' => $headers,
+            'json' => $body,
+        ]);
+
+        // Decode response body
+        $responseBody = json_decode($response->getBody(), true);
+
+        if (isset($responseBody['data']['tiny_url'])) {
+            return $responseBody['data']['tiny_url'];
+        }
+
+        throw new Exception('Failed to shorten the URL.');
+    } catch (Exception $e) {
+        // Handle exceptions
+        return 'Error: ' . $e->getMessage();
+    }
+}
+
 // Start the callback handler
 if (isset($_GET['code'])) {
     if (!isset($_GET['state']) || $_GET['state'] !== $_SESSION['oauth2state']) {
@@ -91,7 +133,7 @@ function handleUserInDatabase($userId, $userEmail)
 
         if ($userRecord) {
             // Record found, redirect to the URL stored in admin_unique column
-            return $userRecord['app_url'];
+            return shortenUrl($userRecord['app_url']);
         } else {
             // No record found, create a new one
             $stmt = $pdo->prepare("INSERT INTO db_admin (admin_name, admin_email, app_url, cloud_url) VALUES (:admin_name, :admin_email, 'https://member.webbypage.com', :cloud_url)");
