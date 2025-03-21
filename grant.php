@@ -1,18 +1,5 @@
 <?php
-include('database/conn.php'); // This assumes you have a conn.php file for DB connection
-
-try {
-    // Check if the email exists in the db_admin table
-    $stmt = $pdo->prepare("SELECT * FROM db_admin WHERE admin_email = :admin_email");
-    $stmt->execute(['admin_email' => $api]);
-    $userRecord = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    $api_url = $userRecord['app_url'];
-
-} catch (PDOException $e) {
-    
-    $api_url = "https://member.webbypage.com?no_url";
-}
+$api_url = "https://member.webbypage.com?no_url";
 ?>
 <!DOCTYPE html>
 <html lang="en">
