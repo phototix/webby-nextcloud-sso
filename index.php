@@ -1,4 +1,12 @@
 <?php
+
+require 'vendor/autoload.php';
+
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
+
+session_start();
+
 $showError="yes";
 if($showError=="yes"){
     ini_set('display_errors', 1);
@@ -7,13 +15,6 @@ if($showError=="yes"){
 }
 
 if (!isset($_GET['redirect'])) {
-
-    require 'vendor/autoload.php';
-
-    use GuzzleHttp\Client;
-    use GuzzleHttp\Exception\RequestException;
-
-    session_start();
 
     // Load configuration
     $config = require 'config.php';
@@ -52,7 +53,7 @@ if (!isset($_GET['redirect'])) {
         include("login.php");
     }
 }else{
-    $redirectUrl = filter_var($_GET['redirect'], FILTER_SANITIZE_URL); // Sanitize the redirect URL
+    $redirectUrl = $_GET['redirect']; // Sanitize the redirect URL
     header('Location: ' . $redirectUrl);
     exit;
 }
