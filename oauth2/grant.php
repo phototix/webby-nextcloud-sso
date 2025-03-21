@@ -3,7 +3,7 @@
 
 // Load DB credentials from external config file
 $config = include('../config.php');
-
+echo $config;
 try {
     // Create a new PDO connection
     $pdo = new PDO(
