@@ -2,7 +2,7 @@
 // conn.php - Database connection file
 
 // Load DB credentials from external config file
-$config = include($_SERVER['DOCUMENT_ROOT'] . 'config.php');
+$config = include('../config.php');
 
 try {
     // Create a new PDO connection
