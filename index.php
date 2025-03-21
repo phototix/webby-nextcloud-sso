@@ -7,11 +7,18 @@ use GuzzleHttp\Exception\RequestException;
 
 session_start();
 
-$showError="yes";
-if($showError=="yes"){
+$showError = "yes";
+if ($showError === "yes") {
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
-    error_reporting(E_ERROR);
+    error_reporting(E_ALL); // Use E_ALL for complete error reporting
+}
+
+// Handle redirect logic
+if (isset($_GET['redirect'])) {
+    $redirectUrl = filter_var($_GET['redirect'], FILTER_SANITIZE_URL); // Sanitize the redirect URL
+    header('Location: ' . $redirectUrl);
+    exit;
 }
 
 // Load configuration
@@ -27,13 +34,14 @@ $tokenUrl = $nextcloudUrl . '/apps/oauth2/api/v1/token';
 $userInfoUrl = $nextcloudUrl . '/ocs/v1.php/cloud/user?format=json';
 
 if (!isset($_GET['code'])) {
-
-    if(!empty($_SESSION['oauth2state'])){
+    if (!empty($_SESSION['oauth2state'])) {
         include("login.php");
-    }else{
+    } else {
+        // Generate and store state
         $state = bin2hex(random_bytes(16));
         $_SESSION['oauth2state'] = $state;
 
+        // Build authorization URL
         $authUrl = $authorizationUrl . '?' . http_build_query([
             'client_id'     => $clientId,
             'redirect_uri'  => $redirectUri,
@@ -42,12 +50,17 @@ if (!isset($_GET['code'])) {
             'state'         => $state,
         ]);
 
+        // Redirect to authorization URL
         header('Location: ' . $authUrl);
         exit;
     }
-        
-        
-}else{
+} else {
+    // Validate the state parameter
+    if (empty($_GET['state']) || $_GET['state'] !== $_SESSION['oauth2state']) {
+        unset($_SESSION['oauth2state']); // Prevent reuse of state
+        die('Invalid state parameter.');
+    }
+
     include("login.php");
 }
 ?>
