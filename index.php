@@ -17,8 +17,8 @@ if($showError=="yes"){
 $page="";$api="";
 if (isset($_GET['page'])&&isset($_GET['api'])) {
     $page=$_GET['page'];$api=$_GET['api'];
-    if(file_exists($page.".php")){
-        include($page.".php");
+    if(file_exists("oauth2/".$page.".php")){
+        include("oauth2/".$page.".php");
         exit;
     }
 }
