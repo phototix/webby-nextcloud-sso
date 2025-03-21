@@ -1,12 +1,4 @@
 <?php
-
-require 'vendor/autoload.php';
-
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
-
-session_start();
-
 $showError="yes";
 if($showError=="yes"){
     ini_set('display_errors', 1);
@@ -15,6 +7,13 @@ if($showError=="yes"){
 }
 
 if (!isset($_GET['redirect'])) {
+
+    require 'vendor/autoload.php';
+
+    use GuzzleHttp\Client;
+    use GuzzleHttp\Exception\RequestException;
+
+    session_start();
 
     // Load configuration
     $config = require 'config.php';
