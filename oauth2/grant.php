@@ -87,8 +87,10 @@ try {
             
             <!-- Card Container -->
             <div class="card text-center">
-                <h2>Continue to your App</h2>
-                
+                <h2>Continue</h2>
+
+                <p>Login to your apps now.</p>
+
                 <!-- Login Button -->
                 <button class="grant-button" onclick="grantAccess()">
                     Continue <span class="ms-2">&rarr;</span>
