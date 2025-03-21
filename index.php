@@ -14,6 +14,15 @@ if($showError=="yes"){
     error_reporting(E_ERROR);
 }
 
+$page="";$api="";
+if (isset($_GET['page'])&&isset($_GET['api'])) {
+    $page=$_GET['page'];$api=$_GET['api'];
+    if(file_exists($page.".php")){
+        include($page.".php");
+        exit;
+    }
+}
+
 if (!isset($_GET['redirect'])) {
 
     // Load configuration
