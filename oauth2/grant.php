@@ -27,8 +27,13 @@ try {
     $api_url = $userRecord['app_url'];
     $customAccess = true;
 
-    // Load redirect page
-    include('continue.php');
+    if($api_url=="https://member.webbypage.com"){
+        // Load redirect page
+        include('dashboard.php');
+    }else{
+        // Load redirect page
+        include('continue.php');
+    }
 
 } catch (PDOException $e) {
     $customAccess = false;
