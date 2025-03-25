@@ -58,33 +58,9 @@
             </div>
             <div class="col-md-4">
                 <div class="card text-center p-3">
-                    <h4>Messages</h4>
-                    <p>View your recent messages and notifications.</p>
-                    <button class="btn btn-primary" onclick="navigateTo('messages')">Check Messages</button>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card text-center p-3">
                     <h4>Settings</h4>
                     <p>Manage account settings and security options.</p>
                     <button class="btn btn-primary" onclick="navigateTo('settings')">Open Settings</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="row g-4 mt-3">
-            <div class="col-md-4">
-                <div class="card text-center p-3">
-                    <h4>Analytics</h4>
-                    <p>View your usage statistics and reports.</p>
-                    <button class="btn btn-primary" onclick="navigateTo('analytics')">View Analytics</button>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card text-center p-3">
-                    <h4>Support</h4>
-                    <p>Contact support for assistance and help.</p>
-                    <button class="btn btn-primary" onclick="navigateTo('support')">Get Support</button>
                 </div>
             </div>
             <div class="col-md-4">
@@ -95,6 +71,7 @@
                 </div>
             </div>
         </div>
+        
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
